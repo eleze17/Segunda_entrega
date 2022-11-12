@@ -11,21 +11,30 @@ const {carritos} = require('../modelos/models.js')
     }
 
     async  insertar(docu){
-        await mongoose.connect(process.env.cadenaConex)
-        console.log('mongo conectado')
 
-        /*if (this.model = "productos"){
-                const docNuevo =  new productos(docu)
-                await docNuevo.save()   }
-        else {
-            const docNuevo = new  carritos(docu)
-            await docNuevo.save()}
-            */
+        try { 
+            
+            const connection = await mongoose.connect(process.env.cadenaConex, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            })
+            
+                     
+                
+                if (this.model = "productos"){
+                console.log('mongo conectado')
+                    const docNuevo =  new productos(docu)
+                    await docNuevo.save()   }
+                 else {
+                console.log('mongo conectado')
+                    const docNuevo = new  carritos(docu)
+                    await docNuevo.save()}
+            
             console.log('documento agregado!')
-        }       
+        }  catch(error){(console.log(error))  }   
     
     
 }
 
-
+}
 module.exports = crudMongo
