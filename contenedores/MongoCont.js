@@ -1,12 +1,9 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
-const productos = require('../modelos/models.js')
-const carritos = require('../modelos/models.js')
+const {productos} = require('../modelos/models.js')
+const {carritos} = require('../modelos/models.js')
 
 
-
-mongoose.connect(process.env.cadenaConex)
-console.log('mongoatlas conectado')
 
  class crudMongo{
     constructor(model){
@@ -14,11 +11,16 @@ console.log('mongoatlas conectado')
     }
 
     async  insertar(docu){
-        if (this.model = "productos"){
-                const docNuevo =  new productos(docu)}
+        await mongoose.connect(process.env.cadenaConex)
+        console.log('mongo conectado')
+
+        /*if (this.model = "productos"){
+                const docNuevo =  new productos(docu)
+                await docNuevo.save()   }
         else {
-            const docNuevo =  new carritos(docu)}
-            await docNuevo.save()
+            const docNuevo = new  carritos(docu)
+            await docNuevo.save()}
+            */
             console.log('documento agregado!')
         }       
     
