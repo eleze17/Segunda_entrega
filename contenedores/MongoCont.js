@@ -10,14 +10,16 @@ const {carritos} = require('../modelos/models.js')
         this.model = model
     }
 
+        async conectar() { const connection = await mongoose.connect(process.env.cadenaConex, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true })
+        }
+
     async  insertar(docu){
 
         try { 
             
-            const connection = await mongoose.connect(process.env.cadenaConex, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true
-            })
+         this.conectar()
             
                      
                 
@@ -35,6 +37,98 @@ const {carritos} = require('../modelos/models.js')
     
     
 }
+
+
+async  eliminar(dato){
+
+    try { 
+        
+     this.conectar()
+        
+                 
+            
+            if (this.model = "productos"){
+            console.log('mongo conectado')
+            let del = await productos.deleteMany(dato) 
+            console.log('documento borrado!')
+      
+             }
+             else {
+            console.log('mongo conectado')
+            let del = await carritos.deleteMany(dato)  
+            console.log('documento borrado!')
+     
+
+        }
+        
+    }  catch(error){(console.log(error))  }   
+
+
+}
+
+
+
+async  actualizar(dato,nuevovalor){
+
+    try { 
+        
+     this.conectar()
+        
+                 
+            
+            if (this.model = "productos"){
+            console.log('mongo conectado')
+            let upd = await productos.updateMany(dato,{$set: nuevovalor }) 
+            console.log('documento actualizado!')
+      
+             }
+             else {
+            console.log('mongo conectado')
+            let upd = await carritos.updateMany(dato,{$set: nuevovalor }) 
+            console.log('documento actualizado!')
+      
+
+        }
+        
+    }  catch(error){(console.log(error))  }   
+
+}
+    async leer (dato){
+
+        try { 
+            
+         this.conectar()
+            
+                     
+                
+                if (this.model = "productos"){
+                console.log('mongo conectado')
+                let buscado = await productos.find(dato) 
+                console.log('documento buscado!' + buscado)
+          
+                 }
+                 else {
+                console.log('mongo conectado')
+                let upd = await carritos.find(dato) 
+                console.log('documento buscado!' + buscado)
+          
+    
+            }
+            
+        }  catch(error){(console.log(error))  }   
+    
+    
+    }
+    
+
+
+
+
+
+
+
+
+
 
 }
 module.exports = crudMongo

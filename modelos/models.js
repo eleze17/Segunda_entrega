@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 const productosColeccion = 'productos';
 
 const productosSchema= new mongoose.Schema({
-                id : {type: Number,require:true},
-                nombre:{type: String,require:true,max:200},
-                categoria:{type: String,require:false,max:200},
-                precio:{type: Number,require:true},
-                stock:{type: Number,require:true}
+                id : {type: Number,required:true},
+                nombre:{type: String,required:true,max:200},
+                categoria:{type: String,required:false,max:200},
+                precio:{type: Number,required:true},
+                stock:{type: Number,required:true}
 
 
 })
@@ -18,10 +18,10 @@ const productosSchema= new mongoose.Schema({
 const carritosColeccion = 'carritos';
 
 const carritosSchema= new mongoose.Schema({
-                id : {type: Number,require:true},
-                productos:{type: Array,require:true},
-                monto:{type: String,require:false,max:200},
-                usuarioCarrito:{type: Number,require:true},
+                id : {type: Number,required:true},
+                productos:{type: Array,required:true},
+                monto:{type: String,required:false,max:200},
+                usuarioCarrito:{type: Number,required:true},
                 time:{type: Date, default: Date.now}
 
 

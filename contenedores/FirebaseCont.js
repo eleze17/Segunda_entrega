@@ -24,11 +24,15 @@ class firebase   {
     async selectOne (id){
         try{
             const docBuscado = await this.coleccion.doc(id).get();
+          
            if(!docBuscado.exists) {
                 throw new Error('No existe el id buscado')
+              
             }else{
-                const result = docBuscado.data;
-                return {...result,id}
+                const result = docBuscado.data();
+                console.log(result)
+                //return {...result,id}
+               
             }
         } catch(error){
             throw new Error(error)
