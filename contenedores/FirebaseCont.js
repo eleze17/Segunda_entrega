@@ -41,26 +41,35 @@ class firebase   {
     }
     async selectAll (){
         try{
+           // console.log(this.coleccion._queryOptions.collectionId)
             const todo = await this.coleccion.get();
             let docs = todo.docs;
-            if (this.collecion =="productos"){
-            const respuesta = docs.map((d)=>({
+            if (this.coleccion._queryOptions.collectionId =="productos"){
+             let doc = docs.map((d)=>(console.log(d) ,{
+                
                 id : d.id,
-                nombre:d.nombre,
-                categoria:d.categoria,
-                precio:d.precio,
-                stock:d.stock
-            })
-            )}else{
-                const respuesta = docs.map((d)=>({
+                categoria:d.data().categoria,
+                nombre:d.data().nombre,
+                precio:d.data().precio,
+                stock:d.data().stock}
+                
+                )
+            
+            )   ; console.log(doc)
+        } 
+        else{
+                const doc = docs.map((d)=>({
                     id : d.id,
-                    usuarioCarrito:d.usuariocarrito,
-                    productos:d.productos,
-                    monto:d.monto,
-                    time:d.time
+                    usuarioCarrito:d.data().usuariocarrito,
+                    productos:d.data().productos,
+                    monto:d.data().monto,
+                    time:d.data().time
                 })
-
-            )}
+             
+            );
+            //console.log(doc)
+        }
+           
         
         } catch(error){
             throw new Error(error)
@@ -71,7 +80,7 @@ class firebase   {
     async update (id,dato){
 
         try{
-        const doc = this.coleccion.doc(id).update(dato);
+        const doc = await this.coleccion.doc(id).update(dato);
         console.log(doc)    
 
         }
@@ -83,7 +92,7 @@ class firebase   {
     async delete (id){
         
         try{
-            const doc = this.coleccion.doc(id).delete();
+             const doc = await this.coleccion.doc(id).delete();
             console.log(doc + ' eliminado')     
     
             }

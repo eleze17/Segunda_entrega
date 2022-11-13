@@ -12,11 +12,13 @@ base.insertar({
     nombre: "sevenup",  categoria: "gaseosa",precio: 500,stock: 260
 })*/
 
-base.selectOne("Qeue2lFuEozdSOCjIm2d")
+//base.selectOne("Qeue2lFuEozdSOCjIm2d")
 
+//base.selectAll()
 
+//base.update("Qeue2lFuEozdSOCjIm2d",{nombre:"Fanta"})
 
-
+base.delete("Qeue2lFuEozdSOCjIm2d")
 
 /*
 mongoProd.insertar({
