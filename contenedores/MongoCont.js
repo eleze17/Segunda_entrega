@@ -15,7 +15,7 @@ const {carritos} = require('../modelos/models.js')
         useUnifiedTopology: true })
         }
 
-    async  insertar(docu){
+    async  insertar(docu,res){
 
         try { 
             
@@ -23,14 +23,17 @@ const {carritos} = require('../modelos/models.js')
             
                      
                 
-                if (this.model = "productos"){
+                if (this.model == "productos"){
                 console.log('mongo conectado')
                     const docNuevo =  new productos(docu)
-                    await docNuevo.save()   }
+                    await docNuevo.save() 
+                   }
                  else {
                 console.log('mongo conectado')
                     const docNuevo = new  carritos(docu)
-                    await docNuevo.save()}
+                    await docNuevo.save()
+                  
+                }
             
             console.log('documento agregado!')
         }  catch(error){(console.log(error))  }   
@@ -39,7 +42,7 @@ const {carritos} = require('../modelos/models.js')
 }
 
 
-async  eliminar(dato){
+async  eliminar(dato,res){
 
     try { 
         
@@ -47,16 +50,18 @@ async  eliminar(dato){
         
                  
             
-            if (this.model = "productos"){
+            if (this.model == "productos"){
             console.log('mongo conectado')
-            let del = await productos.deleteMany(dato) 
-            console.log('documento borrado!')
+            let filtro = {"id":dato}
+            let del = await productos.deleteMany(filtro) 
+            res.send('documento borrado!')
       
              }
              else {
             console.log('mongo conectado')
-            let del = await carritos.deleteMany(dato)  
-            console.log('documento borrado!')
+            let filtro = {"id":dato}
+            let del = await carritos.deleteMany(filtro)  
+            res.send('documento borrado!')
      
 
         }
@@ -68,7 +73,7 @@ async  eliminar(dato){
 
 
 
-async  actualizar(dato,nuevovalor){
+async  actualizar(dato,nuevovalor,res){
 
     try { 
         
@@ -76,16 +81,21 @@ async  actualizar(dato,nuevovalor){
         
                  
             
-            if (this.model = "productos"){
+            if (this.model == "productos"){
             console.log('mongo conectado')
-            let upd = await productos.updateMany(dato,{$set: nuevovalor }) 
-            console.log('documento actualizado!')
+            let filtro = {"id":dato}
+            let campo = nuevovalor.dato
+            console.log(campo)
+            let upd = await productos.updateMany(filtro,{$set: campo }) 
+            res.send('documento actualizado!')
       
              }
              else {
             console.log('mongo conectado')
-            let upd = await carritos.updateMany(dato,{$set: nuevovalor }) 
-            console.log('documento actualizado!')
+            let filtro = {"id":dato}
+            let campo = nuevovalor.dato
+            let upd = await carritos.updateMany(filtro,{$set: campo }) 
+            res.send('documento actualizado!')
       
 
         }
@@ -93,7 +103,7 @@ async  actualizar(dato,nuevovalor){
     }  catch(error){(console.log(error))  }   
 
 }
-    async leer (dato){
+    async leer (dato,res){
 
         try { 
             
@@ -101,17 +111,19 @@ async  actualizar(dato,nuevovalor){
             
                      
                 
-                if (this.model = "productos"){
+                if (this.model == "productos"){
                 console.log('mongo conectado')
-                let buscado = await productos.find(dato) 
+                let buscado = await productos.find({id:dato}) 
                 console.log('documento buscado!' + buscado)
+                res.send(buscado)
           
                  }
                  else {
                 console.log('mongo conectado')
-                let upd = await carritos.find(dato) 
+                let buscado = await carritos.find(dato) 
                 console.log('documento buscado!' + buscado)
-          
+                res.send(buscado)
+             
     
             }
             

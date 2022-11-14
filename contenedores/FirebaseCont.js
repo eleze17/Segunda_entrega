@@ -15,13 +15,16 @@ class firebase   {
         }
     
     
-    async  insertar(docu){
+    async  insertar(docu,res){
     const colecc = this.coleccion
-    await colecc.doc().set(docu);
+    const ins = await colecc.doc().set(docu);
         console.log('documento insertado')
-        };
+        res.send(ins)
+
     
-    async selectOne (id){
+    };
+    
+    async selectOne (id,res){
         try{
             const docBuscado = await this.coleccion.doc(id).get();
           
@@ -30,7 +33,7 @@ class firebase   {
               
             }else{
                 const result = docBuscado.data();
-                console.log(result)
+               res.send(result)
                 //return {...result,id}
                
             }
@@ -77,11 +80,12 @@ class firebase   {
         }    
     }
 
-    async update (id,dato){
+    async update (id,dato,res){
 
         try{
-        const doc = await this.coleccion.doc(id).update(dato);
-        console.log(doc)    
+        let campo = dato.dato    
+        const doc = await this.coleccion.doc(id).update(campo);
+        res.send('Doc_Actualizado')    
 
         }
         catch(error){
@@ -89,11 +93,11 @@ class firebase   {
 
         }
     }
-    async delete (id){
+    async delete (id,res){
         
         try{
              const doc = await this.coleccion.doc(id).delete();
-            console.log(doc + ' eliminado')     
+            res.send('documento eliminado')     
     
             }
             catch(error){

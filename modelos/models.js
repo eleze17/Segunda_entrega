@@ -19,9 +19,9 @@ const carritosColeccion = 'carritos';
 
 const carritosSchema= new mongoose.Schema({
                 id : {type: Number,required:true},
-                productos:{type: Array,required:true},
+                prods:{type: Array,required:true},
                 monto:{type: String,required:false,max:200},
-                usuarioCarrito:{type: Number,required:true},
+                usuarioCarrito:{type: String,required:true},
                 time:{type: Date, default: Date.now}
 
 

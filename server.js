@@ -1,7 +1,63 @@
-const firebase = require("./contenedores/FirebaseCont.js");
+const express = require('express') 
+const productsRouter = require('./routes/routerProductos') 
+const cartRouter = require('./routes/routerCarritos')
+const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.use('/api/productos', productsRouter)
+app.use('/api/carritos', cartRouter)
+
+
+const PORT = process.env.PORT || 8080
+const server = app.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${server.address().port}`)
+})
+server.on('error', error => console.log(`Error en servidor ${error}`))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const firebase = require("./contenedores/FirebaseCont.js");
 const base = new firebase("productos")
 const crudMongo = require('./contenedores/MongoCont')
-const mongoProd = new crudMongo('productos')
+const mongoProd = new crudMongo('productos')*/
 
 
 
@@ -18,7 +74,7 @@ base.insertar({
 
 //base.update("Qeue2lFuEozdSOCjIm2d",{nombre:"Fanta"})
 
-base.delete("Qeue2lFuEozdSOCjIm2d")
+//base.delete("Qeue2lFuEozdSOCjIm2d")
 
 /*
 mongoProd.insertar({
